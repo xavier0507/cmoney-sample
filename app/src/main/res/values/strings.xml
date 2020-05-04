@@ -1,0 +1,33 @@
+<resources>
+
+    <string name="app_name">CMoney</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+
+    <!-- Common -->
+    <string name="text_common_image_content_description">contentDescription</string>
+
+    <!-- Main -->
+    <string name="text_main_toolbar_title">CMoney Sample Application</string>
+    <string name="text_main_title">JSON Placeholder</string>
+    <string name="text_main_request">Request API</string>
+
+    <!-- Album -->
+    <string name="text_album_toolbar_title">Album</string>
+
+    <!-- Detail -->
+    <string name="text_detail_toolbar_title">Detail</string>
+    <string name="text_detail_content_id">id: %1$s</string>
+    <string name="text_detail_content_title">title: %1$s</string>
+
+</resources>
