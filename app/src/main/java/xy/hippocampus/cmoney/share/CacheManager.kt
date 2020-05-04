@@ -25,7 +25,6 @@ class CacheManager {
     companion object {
         private val manager by lazy { CacheManager() }
 
-        fun sharedInstance(): CacheManager =
-            manager
+        fun sharedInstance(): CacheManager = manager
     }
 }
