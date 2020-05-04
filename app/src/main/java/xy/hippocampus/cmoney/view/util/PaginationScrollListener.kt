@@ -1,10 +1,10 @@
 package xy.hippocampus.cmoney.view.util
 
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 abstract class PaginationScrollListener(
-    private val layoutManager: LinearLayoutManager
+    private val layoutManager: GridLayoutManager
 ) : RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -31,9 +31,10 @@ abstract class PaginationScrollListener(
         private const val MAX_TOTAL_COUNT = 200
 
         fun createPaginationScrollListener(
-            layoutManager: LinearLayoutManager,
+            layoutManager: GridLayoutManager,
             listener: (Int) -> Unit
         ): PaginationScrollListener {
+
             return object : PaginationScrollListener(layoutManager) {
                 override fun loadMoreItems(total: Int) {
                     listener(total)

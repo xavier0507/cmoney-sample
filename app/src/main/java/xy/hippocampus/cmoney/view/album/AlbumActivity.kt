@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_album.*
 import xy.hippocampus.cmoney.R
 import xy.hippocampus.cmoney.extension.slideInRight
@@ -19,7 +19,10 @@ class AlbumActivity : BaseActivity<AlbumViewModel>() {
     override val layoutRes: Int by lazy { R.layout.activity_album }
     override val viewModel: AlbumViewModel by lazy { AlbumViewModel() }
 
-    private val albumAdapter: AlbumAdapter by lazy { AlbumAdapter(::clickThumbnailButton) }
+    private val albumHelper: AlbumHelper by lazy { AlbumHelper() }
+    private val albumAdapter: AlbumAdapter by lazy {
+        AlbumAdapter(albumHelper::downloadImage, ::clickThumbnailButton)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +55,7 @@ class AlbumActivity : BaseActivity<AlbumViewModel>() {
             adapter = albumAdapter
             addOnScrollListener(
                 createPaginationScrollListener(
-                    layoutManager as LinearLayoutManager,
+                    layoutManager as GridLayoutManager,
                     ::loadMorePhotoData
                 )
             )
@@ -61,11 +64,11 @@ class AlbumActivity : BaseActivity<AlbumViewModel>() {
         toolbar.setNavigationOnClickListener { viewModel.clickBackButton() }
     }
 
+    private fun loadMorePhotoData(startIndex: Int) = viewModel.viewReady(this, startIndex)
+
     private fun clickThumbnailButton(photoData: PhotoData) {
         viewModel.clickThumbnailButton(photoData)
     }
-
-    private fun loadMorePhotoData(startIndex: Int) = viewModel.viewReady(this, startIndex)
 
     companion object {
 
@@ -88,7 +91,7 @@ class AlbumActivity : BaseActivity<AlbumViewModel>() {
 
     private fun subscribeToCancelAllImageDownloadTaskEvent() {
         viewModel.cancelAllImageDownloadTaskEvent.observe(this) {
-            albumAdapter.cancelAllTasks()
+            albumHelper.cancelAllTasks()
         }
     }
 
