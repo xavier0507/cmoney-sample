@@ -19,9 +19,7 @@ class AlbumActivity : BaseActivity<AlbumViewModel>() {
     override val layoutRes: Int by lazy { R.layout.activity_album }
     override val viewModel: AlbumViewModel by lazy { AlbumViewModel() }
 
-    private val albumAdapter: AlbumAdapter by lazy {
-        AlbumAdapter(::clickThumbnailButton)
-    }
+    private val albumAdapter: AlbumAdapter by lazy { AlbumAdapter(::clickThumbnailButton) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

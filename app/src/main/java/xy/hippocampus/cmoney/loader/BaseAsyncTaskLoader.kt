@@ -8,14 +8,22 @@ abstract class BaseAsyncTaskLoader<T>(
     context: Context
 ) : AsyncTaskLoader<ApiResult<T>>(context) {
 
-    override fun loadInBackground(): ApiResult<T> {
-        val result = ApiResult<T>()
+    override fun onStartLoading() {
+        forceLoad()
+    }
 
-        try {
+    override fun onStopLoading() {
+        cancelLoad()
+    }
+
+    override fun loadInBackground(): ApiResult<T> {
+        var result = ApiResult<T>()
+
+        result = try {
             val response = action()
-            result.data = parseData(response)
+            result.copy(data = parseData(response))
         } catch (e: Exception) {
-            result.exception = e
+            result.copy(exception = e)
         }
 
         return result
